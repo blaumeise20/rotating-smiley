@@ -1,0 +1,79 @@
+<html style="height: 500px; overflow: hidden">
+<head>
+
+</head>
+<body>
+
+
+<div style="position: fixed; top: 100px">
+<svg xmlns="http://www.w3.org/2000/svg" height="300" width="300" id="svg">
+	<image href="src/smiley.jpg" height="300" width="300" id="smiley" />
+	<g style="display: none">
+		<line x1="150" y1="0" x2="150" y2="300" style="stroke: black; stroke-width: 1px" />
+		<line x1="0" y1="150" x2="300" y2="150" style="stroke: black; stroke-width: 1px" />
+		<line x1="150" y1="150" x2="150" y2="150" style="stroke: red; stroke-width: 2px" id="lineX" />
+		<line x1="150" y1="150" x2="150" y2="150" style="stroke: blue; stroke-width: 2px" id="lineY" />
+	</g>
+</svg>
+<br />
+X: <span id="x"></span><br />
+Y: <span id="y"></span><br />
+&alpha;: <span id="alpha"></span><br />
+
+</div>
+<script type="text/javascript">
+	document.body.addEventListener("touchstart touchmove", function() {});
+	var svg = document.querySelector("#svg");
+	var lineX = document.querySelector("#lineX");
+	var lineY = document.querySelector("#lineY");
+	var smiley = document.querySelector("#smiley");
+	var x = document.querySelector("#x");
+	var y = document.querySelector("#y");
+	var alpha = document.querySelector("#alpha");
+	var currentX, currentY, smileyRot = 0, alphaAtStart = 0, smileyRotAtStart = 0, a = 0, cordX = 0, cordY = 0;
+	function reset() {
+		lineX.setAttribute("x2", "150");
+		lineY.setAttribute("x1", "150");
+		lineX.setAttribute("x2", "150");
+		lineX.setAttribute("y2", "150");
+	}
+	svg.addEventListener("touchstart", function(e) {
+		calcAlpha(e);
+		alphaAtStart = a;
+		smileyRotAtStart = smileyRot;
+	});
+	svg.addEventListener("touchmove", function(e) {
+		assign(e);
+	});
+	svg.addEventListener("touchend touchcancel", function(e) {
+		console.log("test");
+		reset();
+	});
+	function assign(e) {
+		calcAlpha(e);
+		x.innerHTML = currentX + " | " + cordX;
+		y.innerHTML = currentY + " | " + cordY;
+		alpha.innerHTML = a.toFixed(2); //Math.PI / 180 * grad = rad
+		smileyRot = (a - alphaAtStart + smileyRotAtStart) % 360;
+		smiley.setAttribute("style", `transform: rotate(${(0 - smileyRot).toFixed(2)}deg); transform-origin: center center;`);
+		lineX.setAttribute("x2", currentX);
+		lineY.setAttribute("x1", currentX);
+		lineY.setAttribute("x2", currentX);
+		lineY.setAttribute("y2", currentY);
+	}
+	function calcAlpha(e) {
+		cordX = (currentX = e.touches[0].clientX - 10) - 150;
+		cordY = 150 - (currentY = e.touches[0].clientY - 110);
+		a = 180 * Math.atan(cordY / cordX) / Math.PI;
+		if (!isPos(cordX) && !isPos(cordY)) a = a + 180;
+		else if (!isPos(cordX) && isPos(cordY)) a = 180 + a;
+		else if (isPos(cordX) && !isPos(cordY)) a = 360 + a;
+	}
+	function isPos(num) {
+		return num == Math.abs(num);
+	}
+</script>
+
+
+</body>
+</html>

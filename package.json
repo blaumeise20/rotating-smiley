@@ -1,0 +1,35 @@
+{
+  "name": "rotating-smiley",
+  "version": "1.0.0",
+  "description": "A Smiley that you can rotate with your mouse or finger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blaumeise20/rotating-smiley.git"
+  },
+  "keywords": [
+    "rotate",
+    "rotating",
+    "smiley",
+    "smile",
+    "drag",
+    "finger",
+    "touch",
+    "mouse",
+    "rotatable",
+    "smiling",
+    "fun"
+  ],
+  "author": "blaumeise20",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blaumeise20/rotating-smiley/issues"
+  },
+  "homepage": "https://github.com/blaumeise20/rotating-smiley#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}

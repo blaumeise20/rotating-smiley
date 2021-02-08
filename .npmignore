@@ -1,0 +1,8 @@
+.editorconfig
+.gitattributes
+.gitignore
+index.js
+original.js
+src/index.css
+src/index.html
+src/smiley.jpg

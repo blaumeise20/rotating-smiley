@@ -1,0 +1,4 @@
+node_modules/
+# for iCloud, if you use nosync
+node_modules
+node_modules.nosync/

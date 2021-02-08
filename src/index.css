@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+}
+#smiley {
+    left: calc(50% - 150px);
+    position: fixed;
+    top: calc(50% - 150px);
+}
